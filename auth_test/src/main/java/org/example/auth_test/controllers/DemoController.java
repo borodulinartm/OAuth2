@@ -10,7 +10,7 @@ public class DemoController {
         return "hello";
     }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String index() {
         return "index";
     }
