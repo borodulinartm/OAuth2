@@ -1,0 +1,27 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/Auth_test
+        username: artem
+        password: 12345
+    jpa:
+      hibernate:
+          ddl-auto: update
+    application:
+        name:
+            "auth_test"
+    main:
+        banner-mode: off
+
+    security:
+        oauth2:
+          client:
+              registration:
+                google:
+                    client-id: 1081480267384-oarn7cmeu82ot9njo5een2ngqaofcij7.apps.googleusercontent.com
+                    client-secret: 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
+                    redirect-uri: http://localhost:8080/hello
+                    scope:
+                      - email
+                      - profile
+server:
+    port: 8080

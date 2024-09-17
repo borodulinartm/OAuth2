@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <h2>please sign in to system</h2>
+    </div>
+
+    <div>
+        <h4>
+            <a th:href="@{/oauth2/authorization/google}">Login with google</a>
+        </h4>
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <div>
+            <p><input type="email" name="email" required class="form-control" placeholder="E-mail" /></p>
+        </div>
+        <div>
+            <p><input type="password" name="pass" required class="form-control" placeholder="Password" /></p>
+        </div>
+        <div>
+            <p><input type="submit" value="Login" class="btn btn-primary" /></p>
+        </div>
+    </form>
+</body>
+</html>
