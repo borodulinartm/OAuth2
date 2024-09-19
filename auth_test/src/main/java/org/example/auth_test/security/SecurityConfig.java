@@ -2,7 +2,6 @@ package org.example.auth_test.security;
 
 import lombok.RequiredArgsConstructor;
 import org.example.auth_test.security.oauth.CustomOAuth2UserService;
-import org.example.auth_test.security.oauth.OAuthLoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,7 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
-    private final OAuthLoginSuccessHandler oAuthLoginSuccessHandler;
 
     private static final String[] AUTH_WHITELIST = {
             "/index",
@@ -39,7 +37,8 @@ public class SecurityConfig {
                 })
                 .oauth2Login(oauth2Login -> {
                     oauth2Login.loginPage("/login");
-                    oauth2Login.successHandler(oAuthLoginSuccessHandler);
+                    oauth2Login.defaultSuccessUrl("/hello");
+
                     oauth2Login.userInfoEndpoint(endPoint -> {
                         endPoint.userService(customOAuth2UserService);
                     });
