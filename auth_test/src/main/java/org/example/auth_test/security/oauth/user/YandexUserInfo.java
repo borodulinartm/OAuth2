@@ -4,33 +4,33 @@ import org.example.auth_test.models.AuthProvider;
 
 import java.util.Map;
 
-public class GoogleUserInfo extends UserInfo {
-    public GoogleUserInfo(Map<String, Object> elems) {
-        super(elems);
+public class YandexUserInfo extends UserInfo {
+    public YandexUserInfo(Map<String, Object> attributes) {
+        super(attributes);
     }
 
     @Override
     public String getUserID() {
-        return (String) attrs.get("sub");
+        return (String) attrs.get("id");
     }
 
     @Override
     public String getUsername() {
-        return (String) attrs.get("name");
+        return (String) attrs.get("login");
     }
 
     @Override
     public String getEmail() {
-        return (String) attrs.get("email");
+        return (String) attrs.get("default_email");
     }
 
     @Override
     public AuthProvider getProvider() {
-        return AuthProvider.GOOGLE;
+        return AuthProvider.YANDEX;
     }
 
     @Override
     public String getNameAttr() {
-        return "email";
+        return "login";
     }
 }

@@ -5,7 +5,7 @@ spring:
         password: 12345
     jpa:
       hibernate:
-          ddl-auto: update
+          ddl-auto: create-drop
     application:
         name:
             "auth_test"
@@ -13,15 +13,28 @@ spring:
         banner-mode: off
 
     security:
-        oauth2:
-          client:
-              registration:
-                google:
-                    client-id: 1081480267384-oarn7cmeu82ot9njo5een2ngqaofcij7.apps.googleusercontent.com
-                    client-secret: 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
-                    redirect-uri: http://localhost:8080/login/oauth2/code/google
-                    scope:
-                      - email
-                      - profile
+      oauth2:
+        client:
+          registration:
+            yandex:
+              provider: yandex
+              client-id: d998bc54971147b58d6895aca6782ee3
+              client-secret: 7750c2fc409049cebcea1ef0b93ad8b5
+              redirect-uri: http://localhost:8080/login/oauth2/code/yandex
+              authorization-grant-type: authorization_code
+              client-name: Yandex
+            google:
+              client-id: 1081480267384-oarn7cmeu82ot9njo5een2ngqaofcij7.apps.googleusercontent.com
+              client-secret: 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
+              redirect-uri: http://localhost:8080/login/oauth2/code/google
+              scope:
+                - email
+                - profile
+          provider:
+            yandex:
+              authorization-uri: https://oauth.yandex.ru/authorize
+              token-uri: https://oauth.yandex.ru/token
+              user-name-attribute: default_email
+              user-info-uri: https://login.yandex.ru/info
 server:
     port: 8080

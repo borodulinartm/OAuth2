@@ -13,6 +13,7 @@ import java.util.Map;
 public class CustomOAuth2User implements OAuth2User {
     private final String oAuth2ClientName;
     private final OAuth2User oAuth2User;
+    private final String nameAttribute;
 
     @Override
     public Map<String, Object> getAttributes() {
@@ -26,6 +27,6 @@ public class CustomOAuth2User implements OAuth2User {
 
     @Override
     public String getName() {
-        return oAuth2User.getAttribute("email");
+        return oAuth2User.getAttribute(nameAttribute);
     }
 }
