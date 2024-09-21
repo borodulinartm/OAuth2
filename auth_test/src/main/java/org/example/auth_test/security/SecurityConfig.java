@@ -2,11 +2,14 @@ package org.example.auth_test.security;
 
 import lombok.RequiredArgsConstructor;
 import org.example.auth_test.security.oauth.CustomOAuth2UserService;
+import org.example.auth_test.security.oauth.OAuth2SuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,10 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
     private static final String[] AUTH_WHITELIST = {
             "/index",
-            "/login"
+            "/login",
+            "/logout"
     };
 
     @Bean
@@ -37,11 +42,17 @@ public class SecurityConfig {
                 })
                 .oauth2Login(oauth2Login -> {
                     oauth2Login.loginPage("/login");
-                    oauth2Login.defaultSuccessUrl("/hello");
 
                     oauth2Login.userInfoEndpoint(endPoint -> {
                         endPoint.userService(customOAuth2UserService);
                     });
+
+                    oauth2Login.successHandler(oAuth2SuccessHandler);
+                })
+                .logout(config -> {
+                    config.logoutUrl("/logout");
+                    config.logoutSuccessUrl("/login");
+                    config.clearAuthentication(true).deleteCookies().invalidateHttpSession(true);
                 });
         return httpSecurity.build();
     }
