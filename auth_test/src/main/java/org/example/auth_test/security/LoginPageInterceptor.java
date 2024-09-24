@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.util.UrlPathHelper;
 
-@Component
+//@Component
 public class LoginPageInterceptor implements HandlerInterceptor {
     // Совсем необязательно использовать такой подход. Достаточно написать anonymous в настройках
     // Хотя в этом случае будет 403 ошибка, что может быть неудобно

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register form</title>
+</head>
+<body>
+    <h1>Registration form</h1>
+    <form th:object="${user}" th:action="@{/register}" method="post">
+        <div>
+            <label th:text="Username"></label>
+            <input th:field="*{userName}">
+            <p th:each="error: ${#fields.errors('userName')}"
+               th:text="${error}">Validation error</p>
+        </div>
+
+        <div>
+            <label th:text="email"></label>
+            <input th:field="*{email}">
+            <p th:each="error: ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
+        </div>
+
+        <div>
+            <label th:text="Password"></label>
+            <input th:field="*{password}" type="password">
+            <p th:each="error: ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
+        </div>
+
+        <div>
+            <label th:text="confirmPassword">Conform your password</label>
+            <input th:field="*{confirmPassword}" type="password">
+            <p th:each="error: ${#fields.errors('confirmPassword')}"
+               th:text="${error}">Validation error</p>
+        </div>
+
+        <button type="submit" th:text="Submit">Submit</button>
+    </form>
+</body>
+</html>
