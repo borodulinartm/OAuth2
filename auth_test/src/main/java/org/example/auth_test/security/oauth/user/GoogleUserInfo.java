@@ -16,7 +16,7 @@ public class GoogleUserInfo extends UserInfo {
 
     @Override
     public String getUsername() {
-        return (String) attrs.get("name");
+        return (String) attrs.get("email");
     }
 
     @Override

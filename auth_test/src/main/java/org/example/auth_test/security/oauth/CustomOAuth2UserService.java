@@ -2,17 +2,12 @@ package org.example.auth_test.security.oauth;
 
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
-import org.example.auth_test.models.AuthProvider;
 import org.example.auth_test.models.User;
 import org.example.auth_test.repository.UserRepository;
-import org.example.auth_test.security.oauth.user.GoogleUserInfo;
 import org.example.auth_test.security.oauth.user.UserInfo;
-import org.example.auth_test.security.oauth.user.YandexUserInfo;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.OAuth2AuthorizationException;
-import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +27,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return new CustomOAuth2User(clientName, oAuth2User, userInfo.getNameAttr());
     }
 
+    // Метод создаёт или обновляет пользователя в БД
     private void createOrUpdateUser(@Nonnull UserInfo userInfo) {
         User curUser = userRepository.findByUsername(userInfo.getEmail());
         if (curUser == null) {

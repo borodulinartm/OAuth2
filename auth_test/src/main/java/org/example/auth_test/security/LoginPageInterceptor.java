@@ -12,6 +12,8 @@ import org.springframework.web.util.UrlPathHelper;
 
 @Component
 public class LoginPageInterceptor implements HandlerInterceptor {
+    // Совсем необязательно использовать такой подход. Достаточно написать anonymous в настройках
+    // Хотя в этом случае будет 403 ошибка, что может быть неудобно
     public static final String LOGIN_URL = "/login";
     private final UrlPathHelper urlPathHelper = new UrlPathHelper();
 
